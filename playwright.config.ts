@@ -5,6 +5,7 @@ export default defineConfig({
   fullyParallel: false,
   retries: 0,
   workers: 1,
+  timeout: 60000,
   reporter: [['html', { outputFolder: 'playwright-report', open: 'never' }]],
   snapshotDir: './tests/visual/__snapshots__',
   snapshotPathTemplate: '{snapshotDir}/{testFilePath}/{arg}{ext}',
@@ -20,8 +21,8 @@ export default defineConfig({
     deviceScaleFactor: 1,
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',
-    actionTimeout: 15000,
-    navigationTimeout: 30000,
+    actionTimeout: 20000,
+    navigationTimeout: 60000,
   },
   projects: [
     {

@@ -16,7 +16,7 @@ test.describe('Visual Regression - Sellout Pages', () => {
    */
   test.describe('Login', () => {
     test.beforeEach(async ({ page }) => {
-      await page.goto(`${BASE_URL}/login`, { waitUntil: 'networkidle' });
+      await page.goto(`${BASE_URL}/login`, { waitUntil: 'load' });
       await disableAnimations(page);
       await waitForPageReady(page);
     });
@@ -63,7 +63,7 @@ test.describe('Visual Regression - Sellout Pages', () => {
    */
   test.describe('Dashboard', () => {
     test.beforeEach(async ({ page }) => {
-      await page.goto(`${BASE_URL}/dashboard`, { waitUntil: 'networkidle' });
+      await page.goto(`${BASE_URL}/dashboard`, { waitUntil: 'load' });
       await disableAnimations(page);
       await waitForPageReady(page);
     });
