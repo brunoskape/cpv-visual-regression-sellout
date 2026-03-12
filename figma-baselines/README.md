@@ -1,49 +1,49 @@
-# Figma Baselines
+# Baselines do Figma
 
-This folder stores PNG images exported from Figma, used as the **design baseline** for visual comparison tests.
+Esta pasta armazena imagens PNG exportadas do Figma, utilizadas como **baseline de design** para os testes de comparação visual.
 
-## Folder Structure
+## Estrutura de Pastas
 
 ```
 figma-baselines/
 ├── home/
-│   ├── home-full-page.png      ← Full page frame export
-│   └── home-header.png         ← Header component frame export
+│   ├── home-full-page.png      ← Exportação do frame completo da página
+│   └── home-header.png         ← Exportação do componente de cabeçalho
 ├── login/
 │   └── login-full-page.png
 └── dashboard/
     └── dashboard-full-page.png
 ```
 
-## How to Export from Figma
+## Como Exportar do Figma
 
-1. Open the Figma project
-2. Select the **Frame** you want to export
-3. In the right panel, go to **Export**
-4. Set format to **PNG** and resolution **1x**
-5. Set the frame width to **1440px** (desktop)
-6. Click **Export** and save the file in the correct folder above
+1. Abra o projeto no Figma
+2. Selecione o **Frame** que deseja exportar
+3. No painel direito, acesse **Export (Exportar)**
+4. Defina o formato como **PNG** e resolução **1x**
+5. Configure a largura do frame para **1440px** (desktop)
+6. Clique em **Export** e salve o arquivo na pasta correta indicada acima
 
-## Important Rules
+## Regras Importantes
 
-- Always export at **1x scale** to avoid size mismatch
-- The frame width must match the viewport defined in `playwright.config.ts` (**1440px**)
-- Commit the baseline PNG files to the repository so the team shares the same reference
-- When the design intentionally changes, update the Figma export and commit the new baseline
+- Sempre exporte na escala **1x** para evitar incompatibilidade de tamanho
+- A largura do frame deve corresponder ao viewport definido em `playwright.config.ts` (**1440px**)
+- Faça commit dos arquivos PNG de baseline no repositório para que o time compartilhe a mesma referência
+- Quando o design mudar intencionalmente, atualize a exportação do Figma e faça commit do novo baseline
 
-## Running Figma Comparison Tests
+## Executando os Testes de Comparação com Figma
 
 ```bash
-# Run all visual tests (Figma comparison tests will skip if baseline not found)
+# Executar todos os testes visuais (testes de comparação com Figma serão ignorados se o baseline não for encontrado)
 npm run test:visual
 
-# View the HTML report with diff images
+# Visualizar o relatório HTML com as imagens de diff
 npm run test:visual:report
 ```
 
-## Where to Find Diff Images
+## Onde Encontrar as Imagens de Diff
 
-After running the tests, diff images (actual vs figma vs diff) are saved at:
+Após executar os testes, as imagens de diff (real vs figma vs diff) são salvas em:
 
 ```
 test-results/figma-diffs/
