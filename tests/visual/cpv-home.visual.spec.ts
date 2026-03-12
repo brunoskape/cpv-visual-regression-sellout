@@ -9,7 +9,7 @@ const BASE_URL = 'https://www.qa.cuidadospelavida.com.br';
 test.describe('Visual Regression - Home Page', () => {
   test.beforeEach(async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto(BASE_URL, { waitUntil: 'networkidle' });
+    await page.goto(BASE_URL, { waitUntil: 'load' });
     await disableAnimations(page);
     await waitForPageReady(page);
   });
