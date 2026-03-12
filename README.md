@@ -1,76 +1,76 @@
 # CPV Visual Regression - Sellout
 
-Visual regression testing project for <a href="https://www.qa.cuidadospelavida.com.br/">CPV Sellout</a> using <a href="https://playwright.dev/">Playwright</a>.
+Projeto de testes de regressão visual para o <a href="https://www.qa.cuidadospelavida.com.br/">CPV Sellout</a> utilizando <a href="https://playwright.dev/">Playwright</a>.
 
-Supports two modes of visual validation:
-- **Snapshot baseline**: compares current UI against a previously approved screenshot
-- **Figma comparison**: compares the current UI against a PNG exported from Figma (design source of truth)
+Suporta dois modos de validação visual:
+- **Snapshot baseline**: compara a UI atual com um screenshot previamente aprovado
+- **Comparação com Figma**: compara a UI atual com um PNG exportado do Figma (fonte de verdade do design)
 
 ---
 
-## Requirements
+## Requisitos
 
 - Node.js 18+
 - npm 9+
 
 ---
 
-## Setup
+## Instalação
 
 ```bash
-# Install dependencies
+# Instalar dependências
 npm install
 
-# Install Playwright browsers
+# Instalar os navegadores do Playwright
 npx playwright install chromium
 ```
 
 ---
 
-## Running Tests
+## Executando os Testes
 
 ```bash
-# Run all visual regression tests
+# Executar todos os testes de regressão visual
 npm run test:visual
 
-# Generate/update baselines (first run or after intentional design changes)
+# Gerar/atualizar os baselines (primeira execução ou após mudanças intencionais de design)
 npm run test:visual:update
 
-# Open the HTML report
+# Abrir o relatório HTML
 npm run test:visual:report
 ```
 
 ---
 
-## Figma Comparison
+## Comparação com Figma
 
-To compare the system against a Figma design:
+Para comparar o sistema com um design do Figma:
 
-1. Export the Figma frame as PNG (1440px wide, 1x scale)
-2. Place the file in the correct folder under `figma-baselines/`
-3. Run `npm run test:visual`
+1. Exporte o frame do Figma como PNG (1440px de largura, escala 1x)
+2. Coloque o arquivo na pasta correta dentro de `figma-baselines/`
+3. Execute `npm run test:visual`
 
-See <a>`figma-baselines/README.md`</a> for full instructions.
+Consulte <a>`figma-baselines/README.md`</a> para instruções completas.
 
 ---
 
-## Project Structure
+## Estrutura do Projeto
 
 ```
 cpv-visual-regression-sellout/
-├── figma-baselines/            ← Figma exported PNGs (design baselines)
+├── figma-baselines/            ← PNGs exportados do Figma (baselines de design)
 │   ├── home/
 │   ├── login/
 │   └── dashboard/
 ├── tests/
 │   └── visual/
 │       ├── helpers/
-│       │   ├── disableAnimations.ts   ← Disables CSS animations for stable screenshots
-│       │   ├── figmaComparison.ts     ← Pixelmatch-based Figma vs System comparison
-│       │   └── waitForPage.ts         ← Waits for page to be in stable state
-│       ├── __snapshots__/             ← Auto-generated Playwright baselines (git ignored)
-│       ├── cpv-home.visual.spec.ts    ← Home page tests
-│       └── cpv-sellout.visual.spec.ts ← Login & Dashboard tests
+│       │   ├── disableAnimations.ts   ← Desabilita animações CSS para screenshots estáveis
+│       │   ├── figmaComparison.ts     ← Comparação Figma vs Sistema baseada em Pixelmatch
+│       │   └── waitForPage.ts         ← Aguarda a página estar em estado estável
+│       ├── __snapshots__/             ← Baselines gerados automaticamente pelo Playwright (ignorados pelo git)
+│       ├── cpv-home.visual.spec.ts    ← Testes da página Home
+│       └── cpv-sellout.visual.spec.ts ← Testes de Login e Dashboard
 ├── playwright.config.ts
 ├── package.json
 └── README.md
@@ -78,19 +78,19 @@ cpv-visual-regression-sellout/
 
 ---
 
-## Snapshot Baseline Workflow
+## Fluxo de Trabalho com Snapshot Baseline
 
-| Situation | Command |
+| Situação | Comando |
 |---|---|
-| First time running | `npm run test:visual:update` |
-| Regular test run | `npm run test:visual` |
-| Design intentionally changed | `npm run test:visual:update` |
-| Unexpected diff found | Investigate diff in `test-results/` |
+| Primeira execução | `npm run test:visual:update` |
+| Execução normal dos testes | `npm run test:visual` |
+| Design alterado intencionalmente | `npm run test:visual:update` |
+| Diff inesperado encontrado | Investigar o diff em `test-results/` |
 
 ---
 
-## Diff Evidence
+## Evidência de Diff
 
-On failure, Playwright saves:
-- `test-results/` → actual screenshots and diffs (Playwright baseline mode)
-- `test-results/figma-diffs/` → actual, figma baseline and diff PNGs (Figma comparison mode)
+Em caso de falha, o Playwright salva:
+- `test-results/` → screenshots reais e diffs (modo baseline do Playwright)
+- `test-results/figma-diffs/` → PNGs real, baseline do Figma e diff (modo comparação com Figma)
