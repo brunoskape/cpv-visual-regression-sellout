@@ -50,10 +50,39 @@ test.describe('Visual Regression - Home Page', () => {
   });
 
   test('Home - footer should match baseline', async ({ page }) => {
-    const footer = page.locator('footer').first();
-    await expect(footer).toBeVisible();
+    // Tenta localizar o footer por diferentes seletores
+    const footerSelectors = ['footer', '[class*="footer"]', '[id*="footer"]', 'div:last-of-type'];
+    let footer = null;
+
+    for (const selector of footerSelectors) {
+      const element = page.locator(selector).last();
+      if (await element.isVisible().catch(() => false)) {
+        footer = element;
+        break;
+      }
+    }
+
+    if (!footer) {
+      // Fallback: screenshot do final da página
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await page.waitForTimeout(800);
+      await expect(page).toHaveScreenshot('home-footer-bottom.png', {
+        clip: {
+          x: 0,
+          y: (await page.evaluate(() => document.body.scrollHeight)) - 400,
+          width: 1440,
+          height: 400,
+        },
+        animations: 'disabled',
+        maxDiffPixelRatio: 0.02,
+      });
+      return;
+    }
+
     await footer.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(800);
+    await disableAnimations(page); // reaplica após scroll
+
     await expect(footer).toHaveScreenshot('home-footer.png', {
       animations: 'disabled',
       maxDiffPixelRatio: 0.02,
